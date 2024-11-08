@@ -16,7 +16,6 @@ public class Register_ServiceImpl implements Register_Service {
         if (getID == null || getID.equals("")) {
             getID = "";
         }
-        System.out.println(getID);
 
         return getID;
     }
