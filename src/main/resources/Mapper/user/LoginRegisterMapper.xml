@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.FortunaFinance_Server.DAO.user.LoginRegisterDAO">
+
+    <select id="ID_Check" parameterType="String" resultType="String">
+        SELECT ID
+        FROM user_n
+        where ID = #{param} AND Del IN(0, 2);
+    </select>
+    
+    <insert id="Register_user_n" parameterType="RegisterReq">
+        INSERT INTO user_n(ID, Password, NOPF, Name, Position_ID, Del)
+        VALUES (#{id}, #{pw}, 0, #{name}, 14, 2)
+    </insert>
+
+    <select id="RegisterIDX" parameterType="RegisterReq" resultType="int">
+        SELECT User_IDX
+        FROM user_n
+        WHERE ID = #{id} AND Password = #{pw} AND Del = 2
+    </select>
+
+    <insert id="Register_user_p" parameterType="RegisterDTO">
+        INSERT INTO user_p(User_IDX, Gender, E_Mail, Phone, `Postal code`, Address, `Detailed address`, Birth)
+        values (#{idx}, #{gender}, #{email}, #{phone}, #{postcode}, #{address}, #{detailAddress}, #{birth})
+    </insert>
+
+    <insert id="Register_user_a" parameterType="RegisterDTO">
+        INSERT INTO user_a(User_IDX, Admin)
+        VALUES (#{idx}, 0);
+    </insert>
+
+    <insert id="Register_user_UUID" parameterType="RegisterDTO">
+        INSERT INTO user_UUID(User_IDX, User_UUID, UUID_Date)
+        values (#{idx}, null, null)
+    </insert>
+
+    <select id="Login" parameterType="LoginReq" resultType="LoginDTO">
+        SELECT User_IDX, Password, NOPF
+        FROM user_n
+        where ID = #{id}
+    </select>
+
+    <update id="Login_fal" parameterType="LoginDTO">
+        UPDATE user_n
+        SET NOPF = NOPF+1
+        WHERE User_IDX = #{useridx};
+    </update>
+
+    <update id="set_UUID" parameterType="LoginDTO" >
+        UPDATE user_UUID
+        SET User_UUID = #{uuid}, UUID_Date = SYSDATE()
+        WHERE User_IDX = #{useridx}
+    </update>
+
+    <update id="set_NOPF" parameterType="LoginDTO">
+        UPDATE user_n
+        SET NOPF = 0
+        WHERE User_IDX = #{useridx}
+    </update>
+
+
+</mapper>
