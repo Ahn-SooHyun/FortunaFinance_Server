@@ -1,7 +1,7 @@
 package kr.co.FortunaFinance_Server.Service.LoginRegister;
 
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.LoginReq;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.RegisterReq;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.LoginReq;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.RegisterReq;
 
 public interface RegisterService {
 

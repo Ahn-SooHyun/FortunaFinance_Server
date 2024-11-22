@@ -1,4 +1,4 @@
-package kr.co.FortunaFinance_Server.DTO.user.LoginRegister;
+package kr.co.FortunaFinance_Server.DTO.LoginRegister;
 
 import lombok.Data;
 

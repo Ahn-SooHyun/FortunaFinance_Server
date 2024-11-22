@@ -2,8 +2,8 @@ package kr.co.FortunaFinance_Server.controller.user;
 
 
 import jakarta.validation.Valid;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.LoginReq;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.RegisterReq;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.LoginReq;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.RegisterReq;
 import kr.co.FortunaFinance_Server.Service.LoginRegister.RegisterServiceImpl;
 import kr.co.FortunaFinance_Server.Util.BCryptService;
 import kr.co.FortunaFinance_Server.Util.Base64Util;
@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/login-register")

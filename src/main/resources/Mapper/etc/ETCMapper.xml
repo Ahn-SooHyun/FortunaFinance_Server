@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.FortunaFinance_Server.DAO.etc.ETCDAO">
+
+    <select id="uuidCheck" parameterType="String" resultType="java.util.Map">
+        SELECT User_IDX, UUID_Date
+        FROM user_UUID
+        WHERE User_UUID = #{uuid}
+    </select>
+
+    <select id="getName" parameterType="int" resultType="String">
+        SELECT Name
+        FROM user_n
+        WHERE User_IDX = #{param}
+    </select>
+    
+    <update id="uuidDateUpdate" parameterType="String">
+        UPDATE user_UUID
+        SET UUID_Date = SYSDATE()
+        WHERE User_UUID = #{param}
+    </update>
+
+</mapper>

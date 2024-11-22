@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.FortunaFinance_Server.DAO.accounting.AccountingDAO">
+
+    <select id="getProjectList" resultType="LedgerOptionProjectDTO">
+        SELECT Project_Index, Project_Name
+        FROM project
+        where Del = 0;
+    </select>
+
+    <select id="getAccountList" resultType="LedgerOptionAccountDTO">
+        SELECT Account_Index, Account_Name, Account_Type
+        FROM account
+        where Del = 0;
+    </select>
+
+    <select id="getPaymentList" resultType="LedgerOptionPaymentDTO">
+        SELECT CP_Index, Bank, CP_Num, Representative
+        FROM payment_cp
+        where Del = 0;
+    </select>
+
+    <select id="LedgerList" parameterType="ledgerReq" resultType="LedgerListDTO">
+        SELECT AC_Index, ROW_NUMBER() OVER (ORDER BY Date DESC) AS No, Project_IDX, Account, Sortation, Account_Index, Date, Supply_Price, Surtax, Total_Amount, CP_Index, Notice
+        FROM accounting
+        where Del = 0 AND Date BETWEEN #{startDate} AND #{endDate}
+        <if test="category != 'all'">
+            AND Sortation = #{category}
+        </if>
+        <if test="paymentSelect != ''">
+            AND CP_Index = #{paymentSelect}
+        </if>
+        <if test="accountName != ''">
+            AND Account_Index = #{accountName}
+        </if>
+        <if test="project != ''">
+            AND Project_IDX = #{project}
+        </if>
+        <if test="traderName != ''">
+            AND Account LIKE #{traderName}
+        </if>
+        ORDER BY Date DESC
+    </select>
+    
+    <update id="updateDel" parameterType="int">
+        UPDATE accounting
+        SET Del = 1
+        WHERE AC_Index = #{param}
+    </update>
+
+    <insert id="insertLedger" parameterType="LedgerAdditional">
+        INSERT INTO
+            accounting(User_IDX, Project_IDX, Account, Sortation, Account_Index, Date, Supply_Price, Surtax, Total_Amount, CP_Index, Notice, Del)
+        VALUES
+            (#{useridx}, #{project}, #{account}, #{category}, #{accountName}, #{date}, #{supplyprice}, #{surtax}, #{totalAmount}, #{paymentSelect}, #{notice}, 0)
+    </insert>
+
+</mapper>

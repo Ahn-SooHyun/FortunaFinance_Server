@@ -1,10 +1,10 @@
 package kr.co.FortunaFinance_Server.Service.LoginRegister;
 
 import kr.co.FortunaFinance_Server.DAO.user.LoginRegisterDAO;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.LoginDTO;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.LoginReq;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.RegisterDTO;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.RegisterReq;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.LoginDTO;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.LoginReq;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.RegisterDTO;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.RegisterReq;
 import kr.co.FortunaFinance_Server.Util.BCryptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

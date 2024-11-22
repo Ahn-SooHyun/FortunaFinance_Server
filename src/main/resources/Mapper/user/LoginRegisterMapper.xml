@@ -10,13 +10,13 @@
     
     <insert id="Register_user_n" parameterType="RegisterReq">
         INSERT INTO user_n(ID, Password, NOPF, Name, Position_ID, Del)
-        VALUES (#{id}, #{pw}, 0, #{name}, 14, 2)
+        VALUES (#{id}, #{pw}, 0, #{name}, 14, 0)
     </insert>
 
     <select id="RegisterIDX" parameterType="RegisterReq" resultType="int">
         SELECT User_IDX
         FROM user_n
-        WHERE ID = #{id} AND Password = #{pw} AND Del = 2
+        WHERE ID = #{id} AND Password = #{pw} AND Del = 0
     </select>
 
     <insert id="Register_user_p" parameterType="RegisterDTO">

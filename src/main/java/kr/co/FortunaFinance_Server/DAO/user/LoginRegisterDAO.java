@@ -1,9 +1,9 @@
 package kr.co.FortunaFinance_Server.DAO.user;
 
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.LoginDTO;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.LoginReq;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.RegisterDTO;
-import kr.co.FortunaFinance_Server.DTO.user.LoginRegister.RegisterReq;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.LoginDTO;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.LoginReq;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.RegisterDTO;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.RegisterReq;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
