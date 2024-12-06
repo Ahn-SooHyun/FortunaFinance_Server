@@ -9,15 +9,15 @@
             (#{category}, #{title}, #{content}, #{useridx}, 0, 0)
     </insert>
 
-    <select id="LedgerList" parameterType="ledgerReq" resultType="LedgerListDTO">
+    <select id="LedgerList" parameterType="ledgerReq" resultType="NoticeListReq">
         SELECT Notice_Index, Category, Title, Content, User_IDX, User_Date, Good
         FROM notice
         WHERE Del = 0
-        <if test="project != ''">
-            AND Category = #{project}
+        <if test="category != ''">
+            AND Category = #{category}
         </if>
-        <if test="traderName != ''">
-            AND Title LIKE #{traderName}
+        <if test="title != ''">
+            AND Title LIKE #{title}
         </if>
         ORDER BY Date DESC
     </select>
