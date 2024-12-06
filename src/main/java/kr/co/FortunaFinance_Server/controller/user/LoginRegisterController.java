@@ -110,6 +110,12 @@ public class LoginRegisterController {
 
         String uuid = registerservice.login(loginReq);
 
+        if (uuid == null) {
+            data.setCode("400");
+            data.setMessage("Login Failed.");
+            return ResponseEntity.ok(data);
+        }
+
         data.setData(uuid);
 
         return ResponseEntity.ok(data);
