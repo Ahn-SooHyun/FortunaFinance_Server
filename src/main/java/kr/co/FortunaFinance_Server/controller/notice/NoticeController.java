@@ -1,6 +1,8 @@
 package kr.co.FortunaFinance_Server.controller.notice;
 
 import jakarta.validation.Valid;
+import kr.co.FortunaFinance_Server.DTO.LoginRegister.RegisterReq;
+import kr.co.FortunaFinance_Server.DTO.notice.NoticeListReq;
 import kr.co.FortunaFinance_Server.DTO.notice.NoticeadditionReq;
 import kr.co.FortunaFinance_Server.Service.notice.NoticeServiceImpl;
 import kr.co.FortunaFinance_Server.Service.etc.ETCServiceImpl;
@@ -53,9 +55,9 @@ public class NoticeController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> list(@RequestParam String uuid) {
+    public ResponseEntity<?> list(@RequestBody @Valid NoticeListReq noticeListReq) {
         ResponsData data = new ResponsData();
-        int IDX = etcService.uuidCheck(uuid);
+        int IDX = etcService.uuidCheck(noticeListReq.getUuid());
         if (IDX == -1) {
             data.setCode("401");
             data.setMessage("UUID does not exist.");
@@ -66,7 +68,7 @@ public class NoticeController {
             data.setMessage("Your time has expired.");
             return ResponseEntity.ok(data);
         }
-        etcService.uuidDateUpdate(uuid);
+        etcService.uuidDateUpdate(noticeListReq.getUuid());
 
 
 
