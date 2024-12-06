@@ -10,8 +10,8 @@ public class NoticeadditionReq {
 
     private int useridx;
 
-    private String Category;
-    private String Title;
-    private String Content;
+    private String category;
+    private String title;
+    private String content;
 
 }

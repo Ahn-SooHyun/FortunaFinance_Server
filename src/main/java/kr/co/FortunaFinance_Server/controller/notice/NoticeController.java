@@ -24,6 +24,7 @@ public class NoticeController {
 
     @PostMapping("/addition")
     public ResponseEntity<?> addition(@RequestBody @Valid NoticeadditionReq noticeadditionReq) {
+        logger.info(noticeadditionReq.toString());
         ResponsData data = new ResponsData();
         int IDX = etcService.uuidCheck(noticeadditionReq.getUuid());
         if (IDX == -1) {
@@ -36,8 +37,38 @@ public class NoticeController {
             data.setMessage("Your time has expired.");
             return ResponseEntity.ok(data);
         }
+        etcService.uuidDateUpdate(noticeadditionReq.getUuid());
 
         noticeadditionReq.setUseridx(IDX);
+
+
+        int result = noticeService.Notice_addition(noticeadditionReq);
+
+        if (result == 0) {
+            data.setCode("400");
+            data.setMessage("Your time has expired.");
+        }
+
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<?> list(@RequestParam String uuid) {
+        ResponsData data = new ResponsData();
+        int IDX = etcService.uuidCheck(uuid);
+        if (IDX == -1) {
+            data.setCode("401");
+            data.setMessage("UUID does not exist.");
+            return ResponseEntity.ok(data);
+        }
+        if (IDX == 0) {
+            data.setCode("402");
+            data.setMessage("Your time has expired.");
+            return ResponseEntity.ok(data);
+        }
+        etcService.uuidDateUpdate(uuid);
+
+
 
         return ResponseEntity.ok(data);
     }

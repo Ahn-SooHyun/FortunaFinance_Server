@@ -6,7 +6,20 @@
         INSERT INTO
             notice(Category, Title, Content, User_IDX, Del, Good)
         VALUES
-            (#{Category}, #{Title}, #{Content}, #{useridx}, 0, 0)
+            (#{category}, #{title}, #{content}, #{useridx}, 0, 0)
     </insert>
+
+    <select id="LedgerList" parameterType="ledgerReq" resultType="LedgerListDTO">
+        SELECT Notice_Index, Category, Title, Content, User_IDX, User_Date, Good
+        FROM notice
+        WHERE Del = 0
+        <if test="project != ''">
+            AND Category = #{project}
+        </if>
+        <if test="traderName != ''">
+            AND Title LIKE #{traderName}
+        </if>
+        ORDER BY Date DESC
+    </select>
 
 </mapper>
