@@ -9,8 +9,8 @@
             (#{category}, #{title}, #{content}, #{useridx}, 0, 0)
     </insert>
 
-    <select id="LedgerList" parameterType="ledgerReq" resultType="NoticeListReq">
-        SELECT Notice_Index, Category, Title, Content, User_IDX, User_Date, Good
+    <select id="Notice_list" parameterType="ledgerReq" resultType="NoticeListReq">
+        SELECT Notice_Index, Category, Title, User_IDX, User_Date, Good
         FROM notice
         WHERE Del = 0
         <if test="category != ''">
