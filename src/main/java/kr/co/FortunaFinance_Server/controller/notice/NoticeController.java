@@ -2,6 +2,7 @@ package kr.co.FortunaFinance_Server.controller.notice;
 
 import jakarta.validation.Valid;
 import kr.co.FortunaFinance_Server.DTO.LoginRegister.RegisterReq;
+import kr.co.FortunaFinance_Server.DTO.notice.NoticeDetailReq;
 import kr.co.FortunaFinance_Server.DTO.notice.NoticeListReq;
 import kr.co.FortunaFinance_Server.DTO.notice.NoticeadditionReq;
 import kr.co.FortunaFinance_Server.Service.notice.NoticeServiceImpl;
@@ -55,7 +56,7 @@ public class NoticeController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> list(@RequestBody @Valid NoticeListReq noticeListReq) {
+    public ResponseEntity<?> list(@ModelAttribute  NoticeListReq noticeListReq) {
         ResponsData data = new ResponsData();
         int IDX = etcService.uuidCheck(noticeListReq.getUuid());
         if (IDX == -1) {
@@ -70,7 +71,28 @@ public class NoticeController {
         }
         etcService.uuidDateUpdate(noticeListReq.getUuid());
 
+        data.setData(noticeService.Notice_list(noticeListReq));
 
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<?> detail(@ModelAttribute NoticeDetailReq noticeDetailReq) {
+        ResponsData data = new ResponsData();
+        int IDX = etcService.uuidCheck(noticeDetailReq.getUuid());
+        if (IDX == -1) {
+            data.setCode("401");
+            data.setMessage("UUID does not exist.");
+            return ResponseEntity.ok(data);
+        }
+        if (IDX == 0) {
+            data.setCode("402");
+            data.setMessage("Your time has expired.");
+            return ResponseEntity.ok(data);
+        }
+        etcService.uuidDateUpdate(noticeDetailReq.getUuid());
+
+        data.setData(noticeService.Notice_list(noticeListReq));
 
         return ResponseEntity.ok(data);
     }
