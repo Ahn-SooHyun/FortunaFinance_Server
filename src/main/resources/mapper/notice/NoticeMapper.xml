@@ -9,7 +9,7 @@
             (#{category}, #{title}, #{content}, #{useridx}, 0, 0)
     </insert>
 
-    <select id="Notice_list" parameterType="ledgerReq" resultType="NoticeListReq">
+    <select id="Notice_List" parameterType="noticeListReq" resultType="NoticeListDTO">
         SELECT Notice_Index, Category, Title, User_IDX, User_Date, Good
         FROM notice
         WHERE Del = 0
@@ -19,7 +19,7 @@
         <if test="title != ''">
             AND Title LIKE #{title}
         </if>
-        ORDER BY Date DESC
+        ORDER BY Notice_Index  DESC
     </select>
 
 </mapper>

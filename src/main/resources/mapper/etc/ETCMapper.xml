@@ -20,4 +20,9 @@
         WHERE User_UUID = #{param}
     </update>
 
+    <select id="User_Name_List" resultType="UserNameListDTO">
+        SELECT User_IDX, Name
+        FROM user_n
+    </select>
+
 </mapper>

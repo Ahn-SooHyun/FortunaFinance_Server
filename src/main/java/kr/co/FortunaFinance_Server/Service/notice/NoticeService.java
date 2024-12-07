@@ -1,12 +1,14 @@
 package kr.co.FortunaFinance_Server.Service.notice;
 
-import kr.co.FortunaFinance_Server.DTO.notice.NoticeListDTO;
-import kr.co.FortunaFinance_Server.DTO.notice.NoticeListReq;
-import kr.co.FortunaFinance_Server.DTO.notice.NoticeadditionReq;
+import kr.co.FortunaFinance_Server.DTO.notice.*;
+
+import java.util.List;
 
 public interface NoticeService {
 
     int Notice_addition(NoticeadditionReq boardadditionReq);
 
-    NoticeListDTO Notice_list(NoticeListReq boardlistReq);
+    List<NoticeListDTO> Notice_list(NoticeListReq boardlistReq);
+
+    NoticeDetailDTO Notice_Detail(NoticeDetailReq noticeDetailReq);
 }
