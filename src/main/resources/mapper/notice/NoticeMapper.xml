@@ -22,4 +22,30 @@
         ORDER BY Notice_Index  DESC
     </select>
 
+    <select id="Notice_Detail" parameterType="NoticeDetailReq" resultType="NoticeDetailDTO">
+        SELECT Notice_Index, Category, Title, Content, User_IDX, User_Date, Del, Good
+        FROM notice
+        WHERE Del = 0 AND Notice_Index = #{noticeIndex}
+    </select>
+
+    <update id="Notice_Good" parameterType="NoticeGoodReq">
+        UPDATE notice
+        SET Good = Good + 1
+        WHERE Notice_Index = #{noticeIndex} AND Del = 0
+    </update>
+
+    <update id="Notice_Edit" parameterType="NoticeEditReq">
+        UPDATE notice
+        SET Title = #{title},
+            Content = #{content},
+            Category = #{category}
+        WHERE Notice_Index = #{noticeIndex} AND Del = 0
+    </update>
+
+    <update id="Notice_Delete" parameterType="NoticeDeleteReq">
+        UPDATE notice
+        SET Del = 1
+        WHERE Notice_Index = #{noticeIndex} AND Del = 0
+    </update>
+
 </mapper>

@@ -1,10 +1,7 @@
 package kr.co.FortunaFinance_Server.controller.notice;
 
 import jakarta.validation.Valid;
-import kr.co.FortunaFinance_Server.DTO.LoginRegister.RegisterReq;
-import kr.co.FortunaFinance_Server.DTO.notice.NoticeDetailReq;
-import kr.co.FortunaFinance_Server.DTO.notice.NoticeListReq;
-import kr.co.FortunaFinance_Server.DTO.notice.NoticeadditionReq;
+import kr.co.FortunaFinance_Server.DTO.notice.*;
 import kr.co.FortunaFinance_Server.Service.notice.NoticeServiceImpl;
 import kr.co.FortunaFinance_Server.Service.etc.ETCServiceImpl;
 import kr.co.FortunaFinance_Server.Util.ResponsData;
@@ -26,7 +23,7 @@ public class NoticeController {
     private ETCServiceImpl etcService;
 
     @PostMapping("/addition")
-    public ResponseEntity<?> addition(@RequestBody @Valid NoticeadditionReq noticeadditionReq) {
+    public ResponseEntity<?> addition(@RequestBody @Valid NoticeAdditionReq noticeadditionReq) {
         logger.info(noticeadditionReq.toString());
         ResponsData data = new ResponsData();
         int IDX = etcService.uuidCheck(noticeadditionReq.getUuid());
@@ -92,7 +89,93 @@ public class NoticeController {
         }
         etcService.uuidDateUpdate(noticeDetailReq.getUuid());
 
-        data.setData(noticeService.Notice_list(noticeListReq));
+        data.setData(noticeService.Notice_Detail(noticeDetailReq));
+
+        return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/good")
+    public ResponseEntity<?> good(@RequestBody @Valid NoticeGoodReq noticeGoodReq) {
+        ResponsData data = new ResponsData();
+        int IDX = etcService.uuidCheck(noticeGoodReq.getUuid());
+        if (IDX == -1) {
+            data.setCode("401");
+            data.setMessage("UUID does not exist.");
+            return ResponseEntity.ok(data);
+        }
+        if (IDX == 0) {
+            data.setCode("402");
+            data.setMessage("Your time has expired.");
+            return ResponseEntity.ok(data);
+        }
+        etcService.uuidDateUpdate(noticeGoodReq.getUuid());
+
+        int result = noticeService.Notice_Good(noticeGoodReq);
+
+        if (result == 0) {
+            data.setCode("403");
+            data.setMessage("Your time has expired.");
+        }
+
+        data.setData(result);
+
+        return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/edit")
+    public ResponseEntity<?> edit(@RequestBody @Valid NoticeEditReq noticeEditReq) {
+        ResponsData data = new ResponsData();
+        int IDX = etcService.uuidCheck(noticeEditReq.getUuid());
+        if (IDX == -1) {
+            data.setCode("401");
+            data.setMessage("UUID does not exist.");
+            return ResponseEntity.ok(data);
+        }
+        if (IDX == 0) {
+            data.setCode("402");
+            data.setMessage("Your time has expired.");
+            return ResponseEntity.ok(data);
+        }
+        etcService.uuidDateUpdate(noticeEditReq.getUuid());
+
+        int result = noticeService.Notice_Edit(noticeEditReq);
+
+        if (result == 0) {
+            data.setCode("403");
+            data.setMessage("Your time has expired.");
+        }
+
+        data.setData(result);
+
+        return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> delete(@RequestBody @Valid NoticeDeleteReq noticeDeleteReq) {
+        ResponsData data = new ResponsData();
+        int IDX = etcService.uuidCheck(noticeDeleteReq.getUuid());
+        if (IDX == -1) {
+            data.setCode("401");
+            data.setMessage("UUID does not exist.");
+            return ResponseEntity.ok(data);
+        }
+        if (IDX == 0) {
+            data.setCode("402");
+            data.setMessage("Your time has expired.");
+            return ResponseEntity.ok(data);
+        }
+        etcService.uuidDateUpdate(noticeDeleteReq.getUuid());
+
+        logger.info(noticeDeleteReq.getUuid());
+
+        int result = noticeService.Notice_Delete(noticeDeleteReq);
+
+        if (result == 0) {
+            data.setCode("403");
+            data.setMessage("Your time has expired.");
+        }
+
+        data.setData(result);
 
         return ResponseEntity.ok(data);
     }
