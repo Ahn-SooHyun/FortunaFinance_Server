@@ -13,5 +13,6 @@ public class NoticeDetailDTO {
     private String userIdx;
     private Date userDate;
     private int good;
+    private String yn;
 
 }

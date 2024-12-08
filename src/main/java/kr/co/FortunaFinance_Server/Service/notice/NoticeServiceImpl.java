@@ -43,19 +43,24 @@ public class NoticeServiceImpl implements NoticeService {
             }
         }
 
-        logger.info(noticeListDTO.toString());
-
         return noticeListDTO;
     }
 
     @Override
-    public NoticeDetailDTO Notice_Detail(NoticeDetailReq noticeDetailReq) {
+    public NoticeDetailDTO Notice_Detail(NoticeDetailReq noticeDetailReq, int IDX) {
         List<UserNameListDTO> userNameListDTO = etcdao.User_Name_List();
         NoticeDetailDTO noticeDetailDTO = noticeDAO.Notice_Detail(noticeDetailReq);
 
-        for (int i = 0; i < userNameListDTO.size(); i++) {
-            if (noticeDetailDTO.getUserIdx().equals(userNameListDTO.get(i).getUserIdx())) {
-                noticeDetailDTO.setUserIdx(userNameListDTO.get(i).getName());
+        if (noticeDetailDTO.getUserIdx().equals(String.valueOf(IDX))) {
+            noticeDetailDTO.setYn("true");
+        }
+        else {
+            noticeDetailDTO.setYn("false");
+        }
+
+        for (int j = 0; j < userNameListDTO.size(); j++) {
+            if (noticeDetailDTO.getUserIdx().equals(userNameListDTO.get(j).getUserIdx())) {
+                noticeDetailDTO.setUserIdx(userNameListDTO.get(j).getName());
                 break;
             }
         }

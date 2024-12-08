@@ -10,7 +10,7 @@ public interface NoticeService {
 
     List<NoticeListDTO> Notice_list(NoticeListReq boardlistReq);
 
-    NoticeDetailDTO Notice_Detail(NoticeDetailReq noticeDetailReq);
+    NoticeDetailDTO Notice_Detail(NoticeDetailReq noticeDetailReq, int IDX);
 
     int Notice_Good(NoticeGoodReq noticeGoodReq);
 

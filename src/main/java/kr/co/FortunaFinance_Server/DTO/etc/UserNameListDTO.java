@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class UserNameListDTO {
-    private int userIdx;
+    private String userIdx;
     private String Name;
 }

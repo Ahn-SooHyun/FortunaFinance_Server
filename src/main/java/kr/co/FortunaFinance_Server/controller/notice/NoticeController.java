@@ -24,7 +24,6 @@ public class NoticeController {
 
     @PostMapping("/addition")
     public ResponseEntity<?> addition(@RequestBody @Valid NoticeAdditionReq noticeadditionReq) {
-        logger.info(noticeadditionReq.toString());
         ResponsData data = new ResponsData();
         int IDX = etcService.uuidCheck(noticeadditionReq.getUuid());
         if (IDX == -1) {
@@ -89,7 +88,7 @@ public class NoticeController {
         }
         etcService.uuidDateUpdate(noticeDetailReq.getUuid());
 
-        data.setData(noticeService.Notice_Detail(noticeDetailReq));
+        data.setData(noticeService.Notice_Detail(noticeDetailReq, IDX));
 
         return ResponseEntity.ok(data);
     }
@@ -166,7 +165,6 @@ public class NoticeController {
         }
         etcService.uuidDateUpdate(noticeDeleteReq.getUuid());
 
-        logger.info(noticeDeleteReq.getUuid());
 
         int result = noticeService.Notice_Delete(noticeDeleteReq);
 
