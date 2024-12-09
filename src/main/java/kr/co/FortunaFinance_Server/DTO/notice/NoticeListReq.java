@@ -10,4 +10,5 @@ public class NoticeListReq {
     private String uuid;
     private String category;
     private String title;
+    private String user;
 }

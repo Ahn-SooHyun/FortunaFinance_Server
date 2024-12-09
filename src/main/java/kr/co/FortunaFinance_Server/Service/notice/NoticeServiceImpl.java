@@ -32,6 +32,14 @@ public class NoticeServiceImpl implements NoticeService {
         noticeListReq.setTitle("%" + noticeListReq.getTitle() + "%");
 
         List<UserNameListDTO> userNameListDTO = etcdao.User_Name_List();
+
+        for (int j = 0; j < userNameListDTO.size(); j++) {
+            if (noticeListReq.getUser().equals(userNameListDTO.get(j).getName())) {
+                noticeListReq.setUser(userNameListDTO.get(j).getUserIdx());
+                break;
+            }
+        }
+
         List<NoticeListDTO> noticeListDTO = noticeDAO.Notice_List(noticeListReq);
 
         for (int i = 0; i < noticeListDTO.size(); i++) {

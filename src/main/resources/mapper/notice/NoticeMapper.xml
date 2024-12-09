@@ -19,6 +19,9 @@
         <if test="title != ''">
             AND Title LIKE #{title}
         </if>
+        <if test="user != ''">
+            AND User_IDX LIKE #{user}
+        </if>
         ORDER BY Notice_Index  DESC
     </select>
 

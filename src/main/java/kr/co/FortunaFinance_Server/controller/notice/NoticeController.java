@@ -52,7 +52,7 @@ public class NoticeController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> list(@ModelAttribute  NoticeListReq noticeListReq) {
+    public ResponseEntity<?> list(@ModelAttribute NoticeListReq noticeListReq) {
         ResponsData data = new ResponsData();
         int IDX = etcService.uuidCheck(noticeListReq.getUuid());
         if (IDX == -1) {
